@@ -54,11 +54,12 @@ public class OracleDaoConnection implements DaoConnection {
     }
 
     @Override
-    public List<Student> selectAllStudents() {
+    public List<Student> selectStudentsStart(String name) {
         connect();
         List<Student> students = new ArrayList<>();
         try {
-            statement = connection.prepareStatement("SELECT * FROM STUDENTS ORDER BY STUDENT_NAME");
+            statement = connection.prepareStatement("SELECT * FROM STUDENTS WHERE STUDENT_NAME LIKE ?");
+            statement.setString(1, name + '%');
             resultSet = statement.executeQuery();
             while(resultSet.next()) {
                 students.add(parseStudent(resultSet));

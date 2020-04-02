@@ -7,5 +7,5 @@ import java.util.List;
 public interface DaoConnection {
     void connect();
     void disconnect();
-    List<Student> selectAllStudents();
+    List<Student> selectStudentsStart(String name);
 }
